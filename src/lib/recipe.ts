@@ -29,3 +29,16 @@ export const recipeSchema = recipeDataSchema.extend({
 export type ActiveTime = z.infer<typeof activeTimeSchema>;
 export type TotalTime = z.infer<typeof totalTimeSchema>;
 export type Recipe = z.infer<typeof recipeSchema>;
+
+export const activeTimeToString = (activeTime: ActiveTime): string => {
+	switch (activeTime) {
+		case '<1/2':
+			return '< ½';
+		case '1/2-1':
+			return '½–1';
+		case '1-2':
+			return '1–2';
+		case '2+':
+			return '2+';
+	}
+};

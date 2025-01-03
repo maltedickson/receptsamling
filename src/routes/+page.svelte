@@ -60,6 +60,14 @@
 	});
 </script>
 
+<svelte:head>
+	<style>
+		body {
+			background-color: rgb(var(--tw-base-100));
+		}
+	</style>
+</svelte:head>
+
 <div style:--sidebar-width="20rem">
 	<button
 		aria-label="close sidebar"
@@ -113,9 +121,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-	:global(body) {
-		background-color: rgb(var(--tw-base-100));
-	}
-</style>
