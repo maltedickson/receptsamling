@@ -1,4 +1,4 @@
-import recipes from '$lib/recipes';
+import recipes from '$lib/server/recipes';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
