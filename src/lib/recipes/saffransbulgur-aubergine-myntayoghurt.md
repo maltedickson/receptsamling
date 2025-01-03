@@ -1,48 +1,48 @@
 ---
-title: "Saffransbulgur, bakad aubergine och myntayoghurt"
+title: 'Saffransbulgur, bakad aubergine och myntayoghurt'
 ratings:
   Malte: 3
   Tona: 3
-activeTime: "1-2"
+activeTime: '1-2'
 mealTypes:
-  - "huvudrätt"
+  - 'huvudrätt'
 preferences:
-  - "glutenfri"
-  - "vegetarisk"
+  - 'glutenfri'
+  - 'vegetarisk'
 tags:
-  - "höstig"
-  - "somrig"
+  - 'höstig'
+  - 'somrig'
 servings: 4
 ingredients:
-  "Aubergine":
-    - ["aubergine", "ca 1000 g"]
-    - ["salt", "2 krm"]
-    - ["olivolja", "1 msk"]
-  "Marinad":
-    - ["vitlök", "1/2 klyfta"]
-    - ["koriander", "1/2 kruka"]
-    - ["spiskummin, malen", "1 krm"]
-    - ["paprikapulver, milt", "2 krm"]
-    - ["citronskal, finrivet", "1 tsk"]
-    - ["salt", "2 krm"]
-    - ["svartpeppar", "1 krm"]
-    - ["olivolja", "1/2 dl"]
-  "Bulgursallad":
-    - ["gul lök", "1 st"]
-    - ["olivolja", "1 msk"]
-    - ["saffran", "0,25 g"]
-    - ["bulgur (gärna grovkrossad)", "2 1/2 dl"]
-    - ["gröna linser, kokta", "1 förp (à ca 380 g)"]
-    - ["spenat, färsk", "100 g"]
-    - ["olivolja", "3 msk"]
-    - ["citronjuice, färskpressad", "1-2 msk"]
-    - ["russin (gärna gula)", "1 dl"]
-    - ["salt", "1/2 tsk"]
-    - ["svartpeppar", "2 krm"]
-  "Myntayoghurt":
-    - ["matyoghurt (10%)", "3 dl"]
-    - ["mynta", "1 kruka"]
-    - ["salt", "2 krm"]
+  'Aubergine':
+    - ['aubergine', 'ca 1000 g']
+    - ['salt', '2 krm']
+    - ['olivolja', '1 msk']
+  'Marinad':
+    - ['vitlök', '1/2 klyfta']
+    - ['koriander', '1/2 kruka']
+    - ['spiskummin, malen', '1 krm']
+    - ['paprikapulver, milt', '2 krm']
+    - ['citronskal, finrivet', '1 tsk']
+    - ['salt', '2 krm']
+    - ['svartpeppar', '1 krm']
+    - ['olivolja', '1/2 dl']
+  'Bulgursallad':
+    - ['gul lök', '1 st']
+    - ['olivolja', '1 msk']
+    - ['saffran', '0,25 g']
+    - ['bulgur (gärna grovkrossad)', '2 1/2 dl']
+    - ['gröna linser, kokta', '1 förp (à ca 380 g)']
+    - ['spenat, färsk', '100 g']
+    - ['olivolja', '3 msk']
+    - ['citronjuice, färskpressad', '1-2 msk']
+    - ['russin (gärna gula)', '1 dl']
+    - ['salt', '1/2 tsk']
+    - ['svartpeppar', '2 krm']
+  'Myntayoghurt':
+    - ['matyoghurt (10%)', '3 dl']
+    - ['mynta', '1 kruka']
+    - ['salt', '2 krm']
 ---
 
 ## Instruktioner

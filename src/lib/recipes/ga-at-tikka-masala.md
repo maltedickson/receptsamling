@@ -16,7 +16,7 @@ tags:
   - vintrig
 servings: 4
 ingredients:
-  "":
+  '':
     - [tikka masala (färdig sås), 1 burk (à ca 490 g)]
     - [blomkål (eller annan grönsak), 1/2 huvud]
     - [grillost (eller t.ex. kyckling), 1 pkt]

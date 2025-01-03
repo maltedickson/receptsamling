@@ -12,7 +12,7 @@ preferences:
   - vegetarisk
 servings: 4 # TODO: kontrollera
 ingredients:
-  "":
+  '':
     - [spetskål, 1/2 huvud]
     - [olivolja, efter smak]
     - [salt & peppar, efter smak]

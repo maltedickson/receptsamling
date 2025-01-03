@@ -12,7 +12,7 @@ tags:
   - asiatisk
 servings: 2
 ingredients:
-  "":
+  '':
     - [äggnudlar, ca 100-150 g]
     - [sesamolja, 1 tsk]
     - [broccoli, 1 st]
@@ -21,7 +21,7 @@ ingredients:
     - [vitlök, 3 klyftor]
     - [sesamfrön, till topping]
     - [grön lök, till topping]
-  "Till såsen":
+  'Till såsen':
     - [sesamolja, 2 tsk]
     - [ljus soja, drygt 2 msk]
     - [vatten, drygt 1 msk]

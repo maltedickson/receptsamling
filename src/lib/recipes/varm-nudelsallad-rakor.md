@@ -13,7 +13,7 @@ tags:
   - somrig
 servings: 4
 ingredients:
-  "":
+  '':
     - [glas- eller risnudlar, 250 g]
     - [rödlök, 1 liten]
     - [broccoli (endast buketter), 1 liten]
@@ -22,10 +22,10 @@ ingredients:
     - [koriander, 1 kruka]
     - [rapsolja, till stekning]
     - [salt, efter smak]
-  "Räkor":
+  'Räkor':
     - [räkor (skalade), 300 g]
     - [sambal oelek, 2-3 tsk]
-  "Sås":
+  'Sås':
     - [fisksås, 3/4 dl]
     - [lime, 1 st]
     - [strösocker, 1 msk]

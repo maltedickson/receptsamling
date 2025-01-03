@@ -12,14 +12,14 @@ tags:
   - asiatisk
 servings: 2
 ingredients:
-  "":
+  '':
     - [äggnudlar, 200 g]
     - [broccoli, 1 st]
     - [vitlök, 2 klyftor]
     - [rapsolja (neutral), 1/2 dl]
     - [chiliflakes, 1 nypa]
     - [pinjenötter (rostade), 2 msk]
-  "Sås":
+  'Sås':
     - [ostronsås (byt mot hoisin för helt vegetarisk rätt), 3 msk]
     - [soja (japansk), 1 msk]
     - [sesamolja, 1 msk]

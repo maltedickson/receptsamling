@@ -1,23 +1,23 @@
 ---
-title: "Connys räkpasta"
+title: 'Connys räkpasta'
 ratings:
   Malte: 3
   Tona: 3
-activeTime: "1/2-1"
+activeTime: '1/2-1'
 totalTime: 6
 mealTypes:
-  - "huvudrätt"
+  - 'huvudrätt'
 servings: 4
 ingredients:
-  "":
-    - ["räkor, frysta med skal", "1 kg"]
-    - ["pasta, lång", "500 g"]
-    - ["smör", "efter smak"]
-    - ["olivolja", "efter smak"]
-    - ["vitlök, riven/finhackad", "4 klyftor"]
-    - ["torkad chili", "1 st"]
-    - ["persilja, hackad", "1 kruka"]
-    - ["citronzest", "1/2 citron"]
+  '':
+    - ['räkor, frysta med skal', '1 kg']
+    - ['pasta, lång', '500 g']
+    - ['smör', 'efter smak']
+    - ['olivolja', 'efter smak']
+    - ['vitlök, riven/finhackad', '4 klyftor']
+    - ['torkad chili', '1 st']
+    - ['persilja, hackad', '1 kruka']
+    - ['citronzest', '1/2 citron']
 ---
 
 ## Instruktioner

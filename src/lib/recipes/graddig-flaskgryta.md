@@ -10,7 +10,7 @@ tags:
   - bra för matlåda
 servings: 8
 ingredients:
-  "":
+  '':
     - [gul lök, 3 st]
     - [fläskkött, 1 kg]
     - [grädde/imat/crème fraiche, ca 6 dl]

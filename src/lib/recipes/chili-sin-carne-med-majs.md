@@ -14,7 +14,7 @@ tags:
   - höstig
 servings: 8 # enligt ursprungsreceptet, vet inte hur bra det stämmer för oss
 ingredients:
-  "":
+  '':
     - [gul lök, 1 stor]
     - [chilifrukter (röda), 1-2 st]
     - [vitlöksklyftor, 2 st]

@@ -10,10 +10,10 @@ mealTypes:
 preferences:
   - vegetarisk
 ingredients:
-  "":
+  '':
     - [havregryn, 3 dl]
     - [vatten, 1/2 dl]
-    - [mandlar, "drygt 1,5 dl"]
+    - [mandlar, 'drygt 1,5 dl']
     - [valnötter och/eller pecannötter, drygt 1/2 dl]
     - [russin, 1/2 dl]
     - [chiafrön, 1/2 dl]
@@ -23,7 +23,7 @@ ingredients:
     - [kanel, 1 tsk]
     - [vaniljpulver, 1/2 krm]
     - [ljus sirap, 1/2 dl (72 g)]
-    - ["olivolja, ghee eller motsvarande", 1/2 dl]
+    - ['olivolja, ghee eller motsvarande', 1/2 dl]
     - [jordnötssmör, 1/2 dl (45 g)]
 ---
 

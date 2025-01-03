@@ -14,15 +14,15 @@ tags:
   - bra för matlåda
 servings: 4
 ingredients:
-  "":
+  '':
     - [broccoli, 2 st]
     - [vitlök, 1 st (10-12 klyftor)]
     - [split cashews, 130 g eller drygt 2 dl]
     - [kikärtor (kokta), knappt 300 g]
     - [brunt ris eller liknande, 4 port]
-  "Sås":
-    - [ljus soja, "0,5 dl"]
-    - [vatten, "0,3 dl"]
+  'Sås':
+    - [ljus soja, '0,5 dl']
+    - [vatten, '0,3 dl']
     - [chili- och vitlökssås, 1-2 tsk]
     - [majsstärkelse, 1 tsk]
 ---

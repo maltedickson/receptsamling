@@ -11,7 +11,7 @@ preferences:
   - vegetarisk
 servings: 6
 ingredients:
-  "":
+  '':
     - [gul lök, 2 st]
     - [vitlök, 5 klyftor]
     - [smör, till stekning]
