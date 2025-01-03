@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { ActiveTime, TotalTime } from '$lib/recipe';
-	// import { IconPlus } from '@tabler/icons-svelte';
+	import IconPlus from '~icons/tabler/plus';
 	import TimeCircle from '$lib/components/TimeCircle.svelte';
 
 	let { activeTime, totalTime }: { activeTime: ActiveTime; totalTime: TotalTime } = $props();
@@ -21,7 +21,6 @@
 		<TimeCircle version="full" />
 	{/if}
 	{#if totalTime !== undefined}
-		Plus
-		<!-- <IconPlus /> -->
+		<IconPlus />
 	{/if}
 </div>
