@@ -1,10 +1,6 @@
 import matter from 'gray-matter';
-import { z } from 'zod';
+import { recipeDataSchema } from '$lib/recipe';
 import markdownit from 'markdown-it';
-
-const dataSchema = z.object({
-	title: z.string()
-});
 
 const md = markdownit();
 
@@ -19,7 +15,7 @@ const recipes = Object.entries(
 	return {
 		slug: path.split('/').pop()!.replace('.md', ''),
 		content: md.render(file.content),
-		...dataSchema.parse(file.data)
+		...recipeDataSchema.parse(file.data)
 	};
 });
 

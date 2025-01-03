@@ -1,11 +1,7 @@
 <script lang="ts">
+	import BrowsePage from '$lib/components/BrowsePage.svelte';
+
 	let { data } = $props();
 </script>
 
-<ul class="space-y-4">
-	{#each data.recipes as recipe}
-		<li>
-			<a href={`/${recipe.slug}`}>{recipe.title}</a>
-		</li>
-	{/each}
-</ul>
+<BrowsePage recipes={data.recipes} />
