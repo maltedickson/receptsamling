@@ -15,7 +15,7 @@
 	<div class="flex flex-wrap items-center gap-x-2 gap-y-1 leading-none">
 		<div>{label}:</div>
 		{#each list as item}
-			<div class="bg-base-100 rounded px-2 py-1">{item}</div>
+			<div class="rounded bg-base-100 px-2 py-1">{item}</div>
 		{/each}
 	</div>
 {/snippet}
