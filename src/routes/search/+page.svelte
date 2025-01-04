@@ -60,7 +60,7 @@
 		>
 			<input
 				bind:value={inputText}
-				oninput={(e) => {
+				oninput={() => {
 					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}}
 				type="search"

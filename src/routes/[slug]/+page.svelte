@@ -18,7 +18,7 @@
 	function getAvgRating(ratings: Record<string, number>): number {
 		let total = 0;
 		let count = 0;
-		for (const [_, value] of Object.entries(ratings)) {
+		for (const [, value] of Object.entries(ratings)) {
 			total += value;
 			count++;
 		}
