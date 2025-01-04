@@ -18,6 +18,8 @@
 		);
 	});
 
+	let inputElement: HTMLInputElement;
+
 	onMount(() => {
 		sessionStorage.setItem('all-recipes-view', 'search');
 	});
@@ -31,6 +33,10 @@
 		$effect(() => {
 			sessionStorage.setItem(key, inputText);
 		});
+	});
+
+	onMount(() => {
+		inputElement.focus();
 	});
 
 	function handleSubmit(e: SubmitEvent) {
@@ -60,6 +66,7 @@
 		>
 			<input
 				bind:value={inputText}
+				bind:this={inputElement}
 				oninput={() => {
 					window.scrollTo({ top: 0, behavior: 'smooth' });
 				}}
