@@ -6,6 +6,8 @@
 	import IconX from '~icons/tabler/x';
 	import TopBar from '$lib/components/TopBar.svelte';
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
+	import FilterEditor from '$lib/components/filter-editor/FilterEditor.svelte';
+	import type { Recipe } from '$lib/recipe.js';
 
 	let { data } = $props();
 
@@ -60,6 +62,11 @@
 			document.body.classList.remove('overflow-y-hidden', 'lg:overflow-y-auto');
 		}
 	});
+
+	let activeFilterCount = $state(0);
+	let filterFunction: (recipes: Recipe[]) => Recipe[] = $state((recipes) => recipes);
+
+	let filteredRecipes = $derived(filterFunction(data.recipes));
 </script>
 
 <svelte:head>
@@ -94,6 +101,7 @@
 		>
 			<IconX />
 		</button>
+		<FilterEditor bind:activeFilterCount bind:filterFunction />
 	</div>
 
 	<div
@@ -107,11 +115,23 @@
 					{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }
 				]}
 			>
-				<button onclick={openSidebar}>
-					<TopBarIcon>
-						<IconFilter />
-					</TopBarIcon>
-				</button>
+				<div
+					class={[
+						'col-start-1 flex items-center gap-1 transition-opacity',
+						{ 'opacity-50': isSidebarOpen }
+					]}
+				>
+					<button onclick={openSidebar} id="open-sidebar-button">
+						<TopBarIcon>
+							<IconFilter />
+						</TopBarIcon>
+					</button>
+					{#if activeFilterCount > 0}
+						<label for="open-sidebar-button">
+							{activeFilterCount} filter aktiv{#if activeFilterCount === 1}t{:else}a{/if}
+						</label>
+					{/if}
+				</div>
 				<h1 class="text-center font-semibold leading-tight">
 					Familjens<br />receptsamling
 				</h1>
@@ -124,7 +144,7 @@
 		</TopBar>
 		<div class="p-4 md:p-6">
 			<div class={[{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }]}>
-				<RecipeGrid recipes={data.recipes} />
+				<RecipeGrid recipes={filteredRecipes} />
 			</div>
 		</div>
 	</div>

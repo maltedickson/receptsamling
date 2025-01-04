@@ -1,0 +1,25 @@
+<script lang="ts">
+	import type { Snippet } from 'svelte';
+	import IconCheck from '~icons/tabler/check';
+	let { isActive = $bindable(), children }: { isActive: boolean; children: Snippet } = $props();
+</script>
+
+<button
+	onclick={() => (isActive = !isActive)}
+	class={[
+		'flex items-center gap-1 rounded px-2 py-1 leading-tight',
+		{
+			'bg-base-200 active:bg-base-300': isActive
+		},
+		{
+			'border active:bg-base-200': !isActive
+		}
+	]}
+>
+	{#if isActive}
+		<IconCheck class="text-xs" />
+	{/if}
+	<div>
+		{@render children()}
+	</div>
+</button>
