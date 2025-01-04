@@ -5,6 +5,7 @@
 	import IconSearch from '~icons/tabler/search';
 	import IconX from '~icons/tabler/x';
 	import TopBar from '$lib/components/TopBar.svelte';
+	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
 
 	let { data } = $props();
 
@@ -106,15 +107,19 @@
 					{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }
 				]}
 			>
-				<button onclick={openSidebar} class="grid size-10 place-items-center text-xl">
-					<IconFilter />
+				<button onclick={openSidebar}>
+					<TopBarIcon>
+						<IconFilter />
+					</TopBarIcon>
 				</button>
 				<h1 class="text-center font-semibold leading-tight">
 					Familjens<br />receptsamling
 				</h1>
-				<button class="ml-auto grid size-10 place-items-center text-xl">
-					<IconSearch />
-				</button>
+				<a class="ml-auto" href="/search/">
+					<TopBarIcon>
+						<IconSearch />
+					</TopBarIcon>
+				</a>
 			</div>
 		</TopBar>
 		<div class="p-4 md:p-6">
