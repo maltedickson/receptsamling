@@ -4,6 +4,7 @@
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
 	import editDistance from '$lib/edit-distance';
 	import { onMount } from 'svelte';
+	import { flip } from 'svelte/animate';
 	import IconArrowLeft from '~icons/tabler/arrow-left';
 
 	const { data } = $props();
@@ -81,8 +82,8 @@
 <div class="flex-grow p-4">
 	<div class="mx-auto max-w-lg">
 		<ul class="space-y-2">
-			{#each sortedRecipes as recipe}
-				<li class="">
+			{#each sortedRecipes as recipe (recipe.slug)}
+				<li class="" animate:flip={{ duration: 250 }}>
 					<a
 						href={`/${recipe.slug}`}
 						class="flex h-20 items-center overflow-hidden rounded bg-white shadow active:underline"
