@@ -1,55 +1,45 @@
-<script module lang="ts">
-	export type FilterSectionProps = {
-		activeFilterCount: number;
-		filterFunction: (recipes: Recipe[]) => Recipe[];
-		onReset: () => void;
-	};
-</script>
-
 <script lang="ts">
 	import type { Recipe } from '$lib/recipe';
-	import type { Component } from 'svelte';
-	import MealTypesSection from './MealTypesSection.svelte';
-	import IconChevronDown from '~icons/tabler/chevron-down';
 	import IconRestore from '~icons/tabler/restore';
-	import PreferencesSection from './PreferencesSection.svelte';
+	import Section from './Section.svelte';
+	import FilterChips from './FilterChips.svelte';
 
 	let {
-		activeFilterCount = $bindable(),
-		filterFunction = $bindable()
-	}: { activeFilterCount: number; filterFunction: (recipes: Recipe[]) => Recipe[] } = $props();
+		allRecipes,
+		filteredRecipes = $bindable(),
+		activeFilterCount = $bindable()
+	}: {
+		allRecipes: Recipe[];
+		filteredRecipes: Recipe[];
+		activeFilterCount: number;
+	} = $props();
 
-	type FilterSection = {
-		label: string;
-		isOpen: boolean;
-		props: FilterSectionProps;
-		component: Component<FilterSectionProps>;
-	};
+	let tagSelection: Record<string, boolean> = $state(
+		Object.fromEntries(allRecipes.flatMap((recipe) => recipe.tags || []).map((tag) => [tag, false]))
+	);
 
-	let sections: FilterSection[] = $state([
-		{
-			label: 'Typ',
-			isOpen: true,
-			props: { activeFilterCount: 0, filterFunction: (recipes) => recipes, onReset: () => {} },
-			component: MealTypesSection
-		},
-		{
-			label: 'Specialkost',
-			isOpen: true,
-			props: { activeFilterCount: 0, filterFunction: (recipes) => recipes, onReset: () => {} },
-			component: PreferencesSection
-		}
-	]);
+	let selectedTagCount = $derived(
+		Object.values(tagSelection).reduce((acc, isSelected) => acc + (isSelected ? 1 : 0), 0)
+	);
+
+	let filtered = $derived(
+		allRecipes.filter((recipe) =>
+			Object.entries(tagSelection)
+				.filter(([, isSelected]) => isSelected)
+				.every(([selectedTag]) => recipe.tags?.some((tag) => tag === selectedTag))
+		)
+	);
 
 	$effect(() => {
-		activeFilterCount = sections.reduce((acc, curr) => acc + curr.props.activeFilterCount, 0);
-		filterFunction = (recipes: Recipe[]) => {
-			sections.forEach((section) => {
-				recipes = section.props.filterFunction(recipes);
-			});
-			return recipes;
-		};
+		filteredRecipes = filtered;
+		activeFilterCount = selectedTagCount;
 	});
+
+	function resetAllFilters() {
+		tagSelection = Object.fromEntries(
+			allRecipes.flatMap((recipe) => recipe.tags || []).map((tag) => [tag, false])
+		);
+	}
 </script>
 
 <div class="space-y-2">
@@ -61,31 +51,13 @@
 		<button
 			disabled={activeFilterCount === 0}
 			class="mt-2 flex items-center gap-x-1 rounded bg-base-200 px-2 py-1 text-sm active:bg-base-300 disabled:text-base-500 disabled:active:bg-base-200"
-			onclick={() => {
-				sections.forEach((section) => {
-					section.props.onReset();
-				});
-			}}
+			onclick={resetAllFilters}
 		>
 			<IconRestore />
 			Återställ alla
 		</button>
 	</div>
-	{#each sections as section}
-		<details bind:open={section.isOpen} class="group">
-			<summary class="flex cursor-pointer items-center py-2">
-				<h3 class="text-lg font-medium">{section.label}</h3>
-				<div class="ml-auto">
-					<IconChevronDown class="transition-transform group-open:rotate-180" />
-				</div>
-			</summary>
-			<div class="space-y-4 pb-6 pt-2">
-				<section.component
-					bind:activeFilterCount={section.props.activeFilterCount}
-					bind:filterFunction={section.props.filterFunction}
-					bind:onReset={section.props.onReset}
-				/>
-			</div>
-		</details>
-	{/each}
+	<Section label="Etiketter" openByDefualt={true}>
+		<FilterChips bind:state={tagSelection} />
+	</Section>
 </div>

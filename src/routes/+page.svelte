@@ -63,10 +63,8 @@
 		}
 	});
 
+	let filteredRecipes = $state(data.recipes);
 	let activeFilterCount = $state(0);
-	let filterFunction: (recipes: Recipe[]) => Recipe[] = $state((recipes) => recipes);
-
-	let filteredRecipes = $derived(filterFunction(data.recipes));
 </script>
 
 <svelte:head>
@@ -101,7 +99,7 @@
 		>
 			<IconX />
 		</button>
-		<FilterEditor bind:activeFilterCount bind:filterFunction />
+		<FilterEditor allRecipes={data.recipes} bind:filteredRecipes bind:activeFilterCount />
 	</div>
 
 	<div
@@ -144,7 +142,7 @@
 		</TopBar>
 		<div class="p-4 md:p-6">
 			<div class={[{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }]}>
-				<RecipeGrid recipes={filteredRecipes} />
+				<RecipeGrid recipes={JSON.parse(JSON.stringify(filteredRecipes))} />
 			</div>
 		</div>
 	</div>
