@@ -14,31 +14,52 @@
 		activeFilterCount: number;
 	} = $props();
 
-	let tagSelection: Record<string, boolean> = $state(
-		Object.fromEntries(allRecipes.flatMap((recipe) => recipe.tags || []).map((tag) => [tag, false]))
-	);
+	type FilterStates = {
+		tags: {
+			tagSelection: Record<string, boolean>;
+		};
+	};
 
-	let selectedTagCount = $derived(
-		Object.values(tagSelection).reduce((acc, isSelected) => acc + (isSelected ? 1 : 0), 0)
-	);
+	const defaultStates: FilterStates = {
+		tags: {
+			tagSelection: Object.fromEntries(
+				allRecipes.flatMap((recipe) => recipe.tags || []).map((tag) => [tag, false])
+			)
+		}
+	};
 
-	let filtered = $derived(
-		allRecipes.filter((recipe) =>
-			Object.entries(tagSelection)
+	let filterStates: FilterStates = $state(JSON.parse(JSON.stringify(defaultStates)));
+
+	function getFilteredRecipes() {
+		let recipes: Recipe[] = JSON.parse(JSON.stringify(allRecipes));
+
+		recipes = recipes.filter((recipe) =>
+			Object.entries(filterStates.tags.tagSelection)
 				.filter(([, isSelected]) => isSelected)
 				.every(([selectedTag]) => recipe.tags?.some((tag) => tag === selectedTag))
-		)
-	);
+		);
+
+		return recipes;
+	}
+
+	function getActiveFilterCount() {
+		let count = 0;
+
+		count += Object.values(filterStates.tags.tagSelection).reduce(
+			(acc, isSelected) => acc + (isSelected ? 1 : 0),
+			0
+		);
+
+		return count;
+	}
 
 	$effect(() => {
-		filteredRecipes = filtered;
-		activeFilterCount = selectedTagCount;
+		filteredRecipes = getFilteredRecipes();
+		activeFilterCount = getActiveFilterCount();
 	});
 
 	function resetAllFilters() {
-		tagSelection = Object.fromEntries(
-			allRecipes.flatMap((recipe) => recipe.tags || []).map((tag) => [tag, false])
-		);
+		filterStates = JSON.parse(JSON.stringify(defaultStates));
 	}
 </script>
 
@@ -58,6 +79,6 @@
 		</button>
 	</div>
 	<Section label="Etiketter" openByDefualt={true}>
-		<FilterChips bind:state={tagSelection} />
+		<FilterChips bind:state={filterStates.tags.tagSelection} />
 	</Section>
 </div>
