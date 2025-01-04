@@ -1,13 +1,26 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import TopBar from '$lib/components/TopBar.svelte';
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
+	import editDistance from '$lib/edit-distance';
 	import IconArrowLeft from '~icons/tabler/arrow-left';
 
 	const { data } = $props();
 
 	let inputText = $state('');
 
-	function handleSubmit() {}
+	let sortedRecipes = $derived.by(() => {
+		const pattern = inputText.replace(/\s/g, '');
+		return data.recipes.toSorted(
+			(a, b) =>
+				editDistance(pattern, a.title.toLowerCase()) - editDistance(pattern, b.title.toLowerCase())
+		);
+	});
+
+	function handleSubmit(e: SubmitEvent) {
+		e.preventDefault();
+		goto(`/${sortedRecipes[0].slug}/`);
+	}
 </script>
 
 <svelte:head>
@@ -45,7 +58,7 @@
 <div class="flex-grow p-4">
 	<div class="mx-auto max-w-lg">
 		<ul class="space-y-2">
-			{#each data.recipes as recipe}
+			{#each sortedRecipes as recipe}
 				<li class="">
 					<a
 						href={`/${recipe.slug}`}
