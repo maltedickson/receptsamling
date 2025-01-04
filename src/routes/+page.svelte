@@ -4,6 +4,7 @@
 	import IconFilter from '~icons/tabler/filter';
 	import IconSearch from '~icons/tabler/search';
 	import IconX from '~icons/tabler/x';
+	import TopBar from '$lib/components/TopBar.svelte';
 
 	let { data } = $props();
 
@@ -81,7 +82,7 @@
 
 	<div
 		class={[
-			'bg-base-100 fixed bottom-0 left-0 top-0 z-50 w-80 -translate-x-full overflow-y-auto p-4 shadow-lg transition-transform',
+			'fixed bottom-0 left-0 top-0 z-50 w-80 -translate-x-full overflow-y-auto bg-base-100 p-4 shadow-lg transition-transform',
 			{ 'translate-x-0': isSidebarOpen }
 		]}
 	>
@@ -98,26 +99,28 @@
 		style:--scrollbar-width={`${getScrollbarWidth()}px`}
 		class={['transition-[padding-left]', { 'lg:pl-[var(--sidebar-width)]': isSidebarOpen }]}
 	>
-		<div>
+		<TopBar>
 			<div
 				class={[
 					'grid grid-cols-[1fr_auto_1fr]',
 					{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }
 				]}
 			>
-				<button onclick={openSidebar} class="text-xl">
+				<button onclick={openSidebar} class="grid size-10 place-items-center text-xl">
 					<IconFilter />
 				</button>
 				<h1 class="text-center font-semibold leading-tight">
 					Familjens<br />receptsamling
 				</h1>
-				<button class="ml-auto text-xl">
+				<button class="ml-auto grid size-10 place-items-center text-xl">
 					<IconSearch />
 				</button>
 			</div>
-		</div>
-		<div class="main-content">
-			<RecipeGrid recipes={data.recipes} />
+		</TopBar>
+		<div class="p-4 md:p-6">
+			<div class={[{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }]}>
+				<RecipeGrid recipes={data.recipes} />
+			</div>
 		</div>
 	</div>
 </div>
