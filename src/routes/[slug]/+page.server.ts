@@ -4,7 +4,7 @@ import { error } from '@sveltejs/kit';
 export const load = async ({ params }) => {
 	const recipe = recipes.find((recipe) => recipe.slug === params.slug);
 	if (recipe === undefined) {
-		return error(404, 'Receptet kunde inte hittas');
+		return error(404, 'Sidan kunde inte hittas.');
 	}
 	return {
 		recipe: recipe
