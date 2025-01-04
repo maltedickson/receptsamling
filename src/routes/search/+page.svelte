@@ -3,6 +3,7 @@
 	import TopBar from '$lib/components/TopBar.svelte';
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
 	import editDistance from '$lib/edit-distance';
+	import { onMount } from 'svelte';
 	import IconArrowLeft from '~icons/tabler/arrow-left';
 
 	const { data } = $props();
@@ -15,6 +16,10 @@
 			(a, b) =>
 				editDistance(pattern, a.title.toLowerCase()) - editDistance(pattern, b.title.toLowerCase())
 		);
+	});
+
+	onMount(() => {
+		sessionStorage.setItem('all-recipes-view', 'search');
 	});
 
 	function handleSubmit(e: SubmitEvent) {

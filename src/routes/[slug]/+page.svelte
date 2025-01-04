@@ -1,9 +1,19 @@
 <script lang="ts">
 	import Stars from '$lib/components/Stars.svelte';
 	import { activeTimeToString } from '$lib/recipe.js';
+	import { onMount } from 'svelte';
 	import IconChevronLeft from '~icons/tabler/chevron-left';
 	const { data } = $props();
 	const recipe = data.recipe;
+
+	let hrefToAllRecipes = $state('/');
+
+	onMount(() => {
+		const storedView = sessionStorage.getItem('all-recipes-view');
+		if (storedView === 'search') {
+			hrefToAllRecipes = '/search/';
+		}
+	});
 
 	function getAvgRating(ratings: Record<string, number>): number {
 		let total = 0;
@@ -17,7 +27,7 @@
 </script>
 
 <div class="flex px-3 py-4">
-	<a href="/" class="flex items-center">
+	<a href={hrefToAllRecipes} class="flex items-center">
 		<IconChevronLeft />
 		<span>Alla recept</span>
 	</a>
@@ -27,7 +37,7 @@
 	<div class="flex flex-wrap items-center gap-x-2 gap-y-1 leading-none">
 		<div>{label}:</div>
 		{#each list as item}
-			<div class="bg-base-100 rounded px-2 py-1">{item}</div>
+			<div class="rounded bg-base-100 px-2 py-1">{item}</div>
 		{/each}
 	</div>
 {/snippet}
