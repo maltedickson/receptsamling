@@ -22,6 +22,17 @@
 		sessionStorage.setItem('all-recipes-view', 'search');
 	});
 
+	onMount(() => {
+		const key = 'search-page-input-text';
+		const storedInputText = sessionStorage.getItem(key);
+		if (storedInputText !== null) {
+			inputText = storedInputText;
+		}
+		$effect(() => {
+			sessionStorage.setItem(key, inputText);
+		});
+	});
+
 	function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
 		goto(`/${sortedRecipes[0].slug}/`);
