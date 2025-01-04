@@ -10,7 +10,8 @@
 
 	onMount(() => {
 		const key = `filter-section-${label}-is-open`;
-		if (sessionStorage.getItem(key) !== openByDefualt.toString()) {
+		const stored = sessionStorage.getItem(key);
+		if (stored !== null && stored !== openByDefualt.toString()) {
 			isOpen = !openByDefualt;
 		}
 		$effect(() => {
