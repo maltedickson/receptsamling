@@ -3,10 +3,20 @@
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
 	import IconArrowLeft from '~icons/tabler/arrow-left';
 
+	const { data } = $props();
+
 	let inputText = $state('');
 
 	function handleSubmit() {}
 </script>
+
+<svelte:head>
+	<style>
+		body {
+			background-color: rgb(var(--tw-base-100));
+		}
+	</style>
+</svelte:head>
 
 <TopBar>
 	<div class="grid grid-cols-[2.5rem_1fr_2.5rem] gap-x-2">
@@ -34,6 +44,24 @@
 
 <div class="flex-grow p-4">
 	<div class="mx-auto max-w-lg">
-		<!-- <RecipeList recipes={sorted()} /> -->
+		<ul class="space-y-2">
+			{#each data.recipes as recipe}
+				<li class="">
+					<a
+						href={`/${recipe.slug}`}
+						class="flex h-20 items-center overflow-hidden rounded bg-white shadow active:underline"
+					>
+						<img
+							src={`/recipe-photos/${recipe.slug}.webp`}
+							alt=""
+							class="aspect-[5/3] h-full rounded-l object-cover"
+						/>
+						<div class="px-[clamp(0.75rem,3%,1rem)] py-2 leading-tight">
+							{recipe.title}
+						</div>
+					</a>
+				</li>
+			{/each}
+		</ul>
 	</div>
 </div>
