@@ -108,6 +108,6 @@
 			</div>
 		{/each}
 	</div>
-
+	<!-- eslint-disable-next-line svelte/no-at-html-tags -->
 	{@html recipe.content}
 </div>
