@@ -4,7 +4,7 @@
 	import IconStarFilled from '~icons/tabler/star-filled';
 	let { rating, i }: { rating: number; i: number } = $props();
 
-	const rounded = Math.round(rating * 2) / 2;
+	let rounded = $derived(Math.round(rating * 2) / 2);
 </script>
 
 {#if rounded <= i}
