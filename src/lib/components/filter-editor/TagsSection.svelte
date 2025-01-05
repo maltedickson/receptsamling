@@ -35,4 +35,4 @@
 	};
 </script>
 
-<FilterChips bind:state={tagSelection} />
+<FilterChips bind:selection={tagSelection} />

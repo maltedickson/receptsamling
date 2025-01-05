@@ -1,11 +1,19 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
 	import IconCheck from '~icons/tabler/check';
-	let { isActive = $bindable(), children }: { isActive: boolean; children: Snippet } = $props();
+	let {
+		isActive,
+		onToggle,
+		children
+	}: { isActive: boolean; onToggle?: () => void; children: Snippet } = $props();
 </script>
 
 <button
-	onclick={() => (isActive = !isActive)}
+	onclick={() => {
+		if (onToggle !== undefined) {
+			onToggle();
+		}
+	}}
 	class={[
 		'flex items-center gap-1 rounded px-2 py-1 leading-tight',
 		{

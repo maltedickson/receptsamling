@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/recipe';
+	import FilterChip from './FilterChip.svelte';
 	import FilterChips from './FilterChips.svelte';
 	import type { SectionComponentProps } from './FilterEditor.svelte';
 
@@ -48,4 +49,10 @@
 	};
 </script>
 
-<FilterChips bind:state={peopleSelection} />
+<div class="space-y-2">
+	<FilterChip
+		isActive={Object.values(peopleSelection).every((isSelected) => !isSelected)}
+		onToggle={() => (peopleSelection = defaultPeopleSelection)}>Alla</FilterChip
+	>
+	<FilterChips bind:selection={peopleSelection} />
+</div>
