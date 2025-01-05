@@ -7,7 +7,6 @@
 	import TopBar from '$lib/components/TopBar.svelte';
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
 	import FilterEditor from '$lib/components/filter-editor/FilterEditor.svelte';
-	import type { Recipe } from '$lib/recipe.js';
 
 	let { data } = $props();
 
