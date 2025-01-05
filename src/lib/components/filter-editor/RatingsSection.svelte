@@ -16,18 +16,6 @@
 
 	let peopleSelection = $state(defaultPeopleSelection);
 
-	const getActiveFilterCount = () => {
-		let count = 0;
-		if (Object.values(peopleSelection).some((isSelected) => isSelected)) {
-			count++;
-		}
-		return count;
-	};
-
-	$effect(() => {
-		activeFilterCount = getActiveFilterCount();
-	});
-
 	const filterRatings = (recipe: Recipe) => {
 		const newRatingEntries: [string, number][] = [];
 		Object.entries(recipe.ratings || {}).forEach(([name, rating]) => {
@@ -46,6 +34,14 @@
 	processRecipes = (recipes) => {
 		return recipes.map(filterRatings);
 	};
+
+	$effect(() => {
+		let count = 0;
+		if (Object.values(peopleSelection).some((isSelected) => isSelected)) {
+			count++;
+		}
+		activeFilterCount = count;
+	});
 
 	reset = () => {
 		peopleSelection = defaultPeopleSelection;
