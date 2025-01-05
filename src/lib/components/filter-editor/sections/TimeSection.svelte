@@ -5,56 +5,49 @@
 	import type { SectionComponentProps } from '../FilterEditor.svelte';
 
 	let {
-		allRecipes,
 		processRecipes = $bindable(),
 		activeFilterCount = $bindable(),
 		reset = $bindable()
 	}: SectionComponentProps = $props();
 
-	let activeTimeIdx = new SessionState('filters-time-at', 0);
-	let totalTimeIdx = new SessionState('filters-time-tt', 0);
+	let activeTimePos = new SessionState('filters-time-at', 0);
+	let totalTimePos = new SessionState('filters-time-tt', 0);
 
 	processRecipes = (recipes) => {
 		return recipes.filter((recipe) => {
-			// Active Time
-			const timeIndex = activeTimeList.findIndex((value) => recipe.activeTime == value);
-			if (activeTimeIdx.value > timeIndex) {
-				return false;
-			}
-			// Total Time
-			const totalTimeMaxes = [Infinity, 24, 12, 6, 3, 1, 0];
-			const maxTotalTime = totalTimeMaxes[totalTimeIdx.value];
-			if (recipe.totalTime !== undefined && recipe.totalTime > maxTotalTime) {
-				return false;
-			}
-			return true;
+			const doesActiveTimePass =
+				activeTimePos.value <= activeTimeList.findIndex((value) => recipe.activeTime == value);
+			const doesTotalTimePass =
+				recipe.totalTime === undefined ||
+				recipe.totalTime <= [Infinity, 24, 12, 6, 3, 1, 0][totalTimePos.value];
+			return doesActiveTimePass && doesTotalTimePass;
 		});
 	};
 
 	$effect(() => {
 		let count = 0;
-		if (activeTimeIdx.value !== 0) {
+		if (activeTimePos.value !== 0) {
 			count++;
 		}
-		if (totalTimeIdx.value !== 0) {
+		if (totalTimePos.value !== 0) {
 			count++;
 		}
 		activeFilterCount = count;
 	});
 
 	reset = () => {
-		activeTimeIdx.value = 0;
-		totalTimeIdx.value = 0;
+		activeTimePos.value = 0;
+		totalTimePos.value = 0;
 	};
 </script>
 
 <Slider
 	label="Aktiv tid (maxgräns, h)"
-	bind:value={activeTimeIdx.value}
+	bind:value={activeTimePos.value}
 	labels={activeTimeList.map((activeTime) => activeTimeToString(activeTime))}
 />
 <Slider
 	label="Total tid (maxgräns, h)"
-	bind:value={totalTimeIdx.value}
+	bind:value={totalTimePos.value}
 	labels={['∞', '24', '12', '6', '3', '1', '-']}
 />
