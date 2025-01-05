@@ -83,7 +83,7 @@
 	<div class="mx-auto max-w-lg">
 		<ul class="space-y-2">
 			{#each sortedRecipes as recipe (recipe.slug)}
-				<li class="" animate:flip={{ duration: 250 }}>
+				<li animate:flip={{ duration: 150 }}>
 					<a
 						href={`/${recipe.slug}`}
 						class="flex h-20 items-center overflow-hidden rounded bg-white shadow active:underline"
