@@ -124,7 +124,7 @@
 						</TopBarIcon>
 					</button>
 					{#if activeFilterCount > 0}
-						<label for="open-sidebar-button">
+						<label for="open-sidebar-button" class="text-sm leading-tight">
 							{activeFilterCount} filter aktiv{#if activeFilterCount === 1}t{:else}a{/if}
 						</label>
 					{/if}
