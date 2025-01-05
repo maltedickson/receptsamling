@@ -16,6 +16,7 @@
 	import TimeSection from './sections/TimeSection.svelte';
 	import TagsSection from './sections/TagsSection.svelte';
 	import MealTypesSection from './sections/MealTypesSection.svelte';
+	import PreferencesSection from './sections/PreferencesSection.svelte';
 
 	let {
 		allRecipes,
@@ -47,6 +48,11 @@
 			label: 'Typ',
 			openByDefault: true,
 			component: MealTypesSection
+		},
+		preferences: {
+			label: 'Specialkost',
+			openByDefault: true,
+			component: PreferencesSection
 		},
 		tags: {
 			label: 'Etiketter',
