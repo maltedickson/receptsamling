@@ -21,6 +21,6 @@
 		<TimeCircle version="full" />
 	{/if}
 	{#if totalTime !== undefined}
-		<IconPlus />
+		<IconPlus class="text-sm" />
 	{/if}
 </div>
