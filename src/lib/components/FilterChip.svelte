@@ -15,13 +15,14 @@
 			onToggle();
 		}
 	}}
+	style:--check-width="0.55rem"
 	class={[
-		'flex items-center gap-1 rounded border px-2 py-1 leading-tight',
+		'grid items-center rounded border px-[6px] py-1 leading-tight',
 		{
-			'bg-base-200 active:bg-base-300': isActive
+			'grid-cols-[calc(var(--check-width)*2)_1fr] bg-base-200 active:bg-base-300': isActive
 		},
 		{
-			' active:bg-base-200': !isActive
+			' grid-cols-[var(--check-width)_1fr_var(--check-width)] active:bg-base-200': !isActive
 		}
 	]}
 >
@@ -30,7 +31,7 @@
 			<IconCheck class="text-xs" />
 		</div>
 	{/if}
-	<div>
+	<div class="col-start-2">
 		{@render children()}
 	</div>
 </button>
