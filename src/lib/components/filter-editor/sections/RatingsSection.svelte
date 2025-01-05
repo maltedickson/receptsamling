@@ -1,11 +1,10 @@
 <script lang="ts">
-	import type { Recipe } from '$lib/recipe';
 	import { SessionState } from '$lib/session-state.svelte';
-	import FilterChip from './FilterChip.svelte';
-	import FilterChips from './FilterChips.svelte';
-	import type { SectionComponentProps } from './FilterEditor.svelte';
-	import Slider from './Slider.svelte';
-	import ToggleSwitch from './ToggleSwitch.svelte';
+	import FilterChip from '$lib/components/FilterChip.svelte';
+	import FilterChips from '$lib/components/FilterChips.svelte';
+	import type { SectionComponentProps } from '../FilterEditor.svelte';
+	import Slider from '$lib/components/Slider.svelte';
+	import ToggleSwitch from '$lib/components/ToggleSwitch.svelte';
 
 	let {
 		allRecipes,

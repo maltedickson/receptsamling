@@ -10,10 +10,11 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/recipe';
 	import IconRestore from '~icons/tabler/restore';
-	import SectionLayout from './SectionLayout.svelte';
-	import TagsSection from './TagsSection.svelte';
 	import type { Component } from 'svelte';
-	import RatingsSection from './RatingsSection.svelte';
+	import SectionLayout from './SectionLayout.svelte';
+	import RatingsSection from './sections/RatingsSection.svelte';
+	import TimeSection from './sections/TimeSection.svelte';
+	import TagsSection from './sections/TagsSection.svelte';
 
 	let {
 		allRecipes,
@@ -35,6 +36,11 @@
 			label: 'Betyg',
 			openByDefault: true,
 			component: RatingsSection
+		},
+		time: {
+			label: 'Tid',
+			openByDefault: true,
+			component: TimeSection
 		},
 		tags: {
 			label: 'Etiketter',

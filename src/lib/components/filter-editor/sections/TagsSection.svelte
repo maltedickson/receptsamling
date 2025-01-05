@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SessionState } from '$lib/session-state.svelte';
-	import FilterChips from './FilterChips.svelte';
-	import type { SectionComponentProps } from './FilterEditor.svelte';
+	import FilterChips from '$lib/components/FilterChips.svelte';
+	import type { SectionComponentProps } from '../FilterEditor.svelte';
 
 	let {
 		allRecipes,
