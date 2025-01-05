@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+	import { scale } from 'svelte/transition';
 	import IconCheck from '~icons/tabler/check';
 	let {
 		isActive,
@@ -25,7 +26,9 @@
 	]}
 >
 	{#if isActive}
-		<IconCheck class="text-xs" />
+		<div in:scale={{ duration: 150 }}>
+			<IconCheck class="text-xs" />
+		</div>
 	{/if}
 	<div>
 		{@render children()}
