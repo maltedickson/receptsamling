@@ -33,33 +33,33 @@
 		openByDefault: boolean;
 		component: Component<SectionComponentProps>;
 	};
-	const sections: Record<string, Section> = {
-		ratings: {
+	const sections: Section[] = [
+		{
 			label: 'Betyg',
 			openByDefault: true,
 			component: RatingsSection
 		},
-		time: {
+		{
 			label: 'Tid',
 			openByDefault: true,
 			component: TimeSection
 		},
-		mealTypes: {
+		{
 			label: 'Typ',
 			openByDefault: true,
 			component: MealTypesSection
 		},
-		preferences: {
+		{
 			label: 'Specialkost',
 			openByDefault: true,
 			component: PreferencesSection
 		},
-		tags: {
+		{
 			label: 'Etiketter',
 			openByDefault: true,
 			component: TagsSection
 		}
-	};
+	];
 
 	type SectionState = {
 		processRecipes: (recipse: Recipe[]) => Recipe[];
@@ -68,8 +68,8 @@
 	};
 	const sectionStates: Record<string, SectionState> = $state(
 		Object.fromEntries(
-			Object.keys(sections).map((key) => [
-				key,
+			sections.map((section) => [
+				section.label,
 				{
 					processRecipes: (recipes) => recipes,
 					activeFilterCount: 0,
@@ -117,13 +117,13 @@
 			Återställ alla
 		</button>
 	</div>
-	{#each Object.entries(sections) as [sectionName, section]}
+	{#each sections as section}
 		<SectionLayout label={section.label} openByDefault={section.openByDefault}>
 			<section.component
 				{allRecipes}
-				bind:processRecipes={sectionStates[sectionName].processRecipes}
-				bind:activeFilterCount={sectionStates[sectionName].activeFilterCount}
-				bind:reset={sectionStates[sectionName].reset}
+				bind:processRecipes={sectionStates[section.label].processRecipes}
+				bind:activeFilterCount={sectionStates[section.label].activeFilterCount}
+				bind:reset={sectionStates[section.label].reset}
 			/>
 		</SectionLayout>
 	{/each}
