@@ -14,10 +14,14 @@
 	import SectionLayout from './SectionLayout.svelte';
 	import RatingsSection from './sections/RatingsSection.svelte';
 	import TimeSection from './sections/TimeSection.svelte';
-	import TagsSection from './sections/TagsSection.svelte';
 	import MealTypesSection from './sections/MealTypesSection.svelte';
 	import PreferencesSection from './sections/PreferencesSection.svelte';
+	import TagsSection from './sections/TagsSection.svelte';
 	import IngredientsSection from './sections/IngredientsSection.svelte';
+	import ExcludeMealTypesSection from './sections/ExcludeMealTypesSection.svelte';
+	import ExcludePreferencesSection from './sections/ExcludePreferencesSection.svelte';
+	import ExcludeTagsSection from './sections/ExcludeTagsSection.svelte';
+	import ExcludeIngredientsSection from './sections/ExcludeIngredientsSection.svelte';
 
 	let {
 		allRecipes,
@@ -64,6 +68,26 @@
 			label: 'Ingredienser',
 			openByDefault: true,
 			component: IngredientsSection
+		},
+		{
+			label: 'Exkludera typ',
+			openByDefault: false,
+			component: ExcludeMealTypesSection
+		},
+		{
+			label: 'Exkludera specialkost',
+			openByDefault: false,
+			component: ExcludePreferencesSection
+		},
+		{
+			label: 'Exkludera etiketter',
+			openByDefault: false,
+			component: ExcludeTagsSection
+		},
+		{
+			label: 'Exkludera ingredienser',
+			openByDefault: false,
+			component: ExcludeIngredientsSection
 		}
 	];
 
