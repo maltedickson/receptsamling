@@ -15,12 +15,12 @@
 		}
 	}}
 	class={[
-		'flex items-center gap-1 rounded px-2 py-1 leading-tight',
+		'flex items-center gap-1 rounded border px-2 py-1 leading-tight',
 		{
 			'bg-base-200 active:bg-base-300': isActive
 		},
 		{
-			'border active:bg-base-200': !isActive
+			' active:bg-base-200': !isActive
 		}
 	]}
 >
