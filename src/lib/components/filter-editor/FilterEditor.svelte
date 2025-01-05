@@ -17,6 +17,7 @@
 	import TagsSection from './sections/TagsSection.svelte';
 	import MealTypesSection from './sections/MealTypesSection.svelte';
 	import PreferencesSection from './sections/PreferencesSection.svelte';
+	import IngredientsSection from './sections/IngredientsSection.svelte';
 
 	let {
 		allRecipes,
@@ -58,6 +59,11 @@
 			label: 'Etiketter',
 			openByDefault: true,
 			component: TagsSection
+		},
+		{
+			label: 'Ingredienser',
+			openByDefault: true,
+			component: IngredientsSection
 		}
 	];
 
