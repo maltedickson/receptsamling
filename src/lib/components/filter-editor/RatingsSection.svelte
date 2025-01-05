@@ -18,6 +18,9 @@
 	let peopleSelection = $state(defaultPeopleSelection);
 
 	const filterRatings = (recipe: Recipe) => {
+		if (Object.values(peopleSelection).every((isSelected) => !isSelected)) {
+			return recipe;
+		}
 		const newRatingEntries: [string, number][] = [];
 		Object.entries(recipe.ratings || {}).forEach(([name, rating]) => {
 			if (peopleSelection[name]) {
