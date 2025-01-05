@@ -15,6 +15,7 @@
 	import RatingsSection from './sections/RatingsSection.svelte';
 	import TimeSection from './sections/TimeSection.svelte';
 	import TagsSection from './sections/TagsSection.svelte';
+	import MealTypesSection from './sections/MealTypesSection.svelte';
 
 	let {
 		allRecipes,
@@ -41,6 +42,11 @@
 			label: 'Tid',
 			openByDefault: true,
 			component: TimeSection
+		},
+		mealTypes: {
+			label: 'Typ',
+			openByDefault: true,
+			component: MealTypesSection
 		},
 		tags: {
 			label: 'Etiketter',
