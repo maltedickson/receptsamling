@@ -3,16 +3,16 @@
 	import IconChevronDown from '~icons/tabler/chevron-down';
 	let {
 		label,
-		openByDefualt,
+		openByDefault,
 		children
-	}: { label: string; openByDefualt: boolean; children: Snippet } = $props();
-	let isOpen = $state(openByDefualt);
+	}: { label: string; openByDefault: boolean; children: Snippet } = $props();
+	let isOpen = $state(openByDefault);
 
 	onMount(() => {
 		const key = `filter-section-${label}-is-open`;
 		const stored = sessionStorage.getItem(key);
-		if (stored !== null && stored !== openByDefualt.toString()) {
-			isOpen = !openByDefualt;
+		if (stored !== null && stored !== openByDefault.toString()) {
+			isOpen = !openByDefault;
 		}
 		$effect(() => {
 			sessionStorage.setItem(key, isOpen.toString());

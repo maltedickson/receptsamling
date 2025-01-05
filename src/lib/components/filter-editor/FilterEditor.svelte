@@ -1,8 +1,19 @@
+<script module lang="ts">
+	export type SectionComponentProps = {
+		allRecipes: Recipe[];
+		processRecipes: (recipes: Recipe[]) => Recipe[];
+		activeFilterCount: number;
+		reset: () => void;
+	};
+</script>
+
 <script lang="ts">
 	import type { Recipe } from '$lib/recipe';
 	import IconRestore from '~icons/tabler/restore';
-	import Section from './Section.svelte';
-	import FilterChips from './FilterChips.svelte';
+	import SectionLayout from './SectionLayout.svelte';
+	import TagsSection from './TagsSection.svelte';
+	import type { Component } from 'svelte';
+	import RatingsSection from './RatingsSection.svelte';
 
 	let {
 		allRecipes,
@@ -14,86 +25,63 @@
 		activeFilterCount: number;
 	} = $props();
 
-	type FilterStates = {
-		ratings: {
-			peopleSelection: Record<string, boolean>;
-			excludeRecipesWithoutRating: boolean;
-			minRating: number;
-		};
-		tags: {
-			tagSelection: Record<string, boolean>;
-		};
+	type Section = {
+		label: string;
+		openByDefault: boolean;
+		component: Component<SectionComponentProps>;
 	};
-
-	const defaultStates: FilterStates = {
+	const sections: Record<string, Section> = {
 		ratings: {
-			peopleSelection: Object.fromEntries(
-				allRecipes
-					.flatMap((recipe) => Object.keys(recipe.ratings || {}))
-					.map((name) => [name, false])
-			),
-			excludeRecipesWithoutRating: false,
-			minRating: 0
+			label: 'Betyg',
+			openByDefault: true,
+			component: RatingsSection
 		},
 		tags: {
-			tagSelection: Object.fromEntries(
-				allRecipes.flatMap((recipe) => recipe.tags || []).map((tag) => [tag, false])
-			)
+			label: 'Etiketter',
+			openByDefault: true,
+			component: TagsSection
 		}
 	};
 
-	let filterStates: FilterStates = $state(JSON.parse(JSON.stringify(defaultStates)));
-
-	function getFilteredRecipes(): Recipe[] {
-		let recipes: Recipe[] = JSON.parse(JSON.stringify(allRecipes));
-
-		recipes = recipes.map((recipe) => {
-			const newRatingEntries: [string, number][] = [];
-			Object.entries(recipe.ratings || {}).forEach(([name, rating]) => {
-				if (filterStates.ratings.peopleSelection[name]) {
-					newRatingEntries.push([name, rating]);
+	type SectionState = {
+		processRecipes: (recipse: Recipe[]) => Recipe[];
+		activeFilterCount: number;
+		reset: () => void;
+	};
+	const sectionStates: Record<string, SectionState> = $state(
+		Object.fromEntries(
+			Object.keys(sections).map((key) => [
+				key,
+				{
+					processRecipes: (recipes) => recipes,
+					activeFilterCount: 0,
+					reset: () => {}
 				}
-			});
-			const newRatings =
-				newRatingEntries.length === 0 ? undefined : Object.fromEntries(newRatingEntries);
-			return {
-				...recipe,
-				ratings: newRatings
-			};
+			])
+		)
+	);
+
+	function resetAllFilters() {
+		Object.values(sectionStates).forEach((sectionState) => {
+			sectionState.reset();
 		});
+	}
 
-		recipes = recipes.filter((recipe) =>
-			Object.entries(filterStates.tags.tagSelection)
-				.filter(([, isSelected]) => isSelected)
-				.every(([selectedTag]) => recipe.tags?.some((tag) => tag === selectedTag))
-		);
-
+	function processAllRecipes() {
+		let recipes = JSON.parse(JSON.stringify(allRecipes));
+		Object.values(sectionStates).forEach((sectionState) => {
+			recipes = sectionState.processRecipes(recipes);
+		});
 		return recipes;
 	}
 
-	function getActiveFilterCount() {
-		let count = 0;
-
-		if (Object.values(filterStates.ratings.peopleSelection).some((isSelected) => isSelected)) {
-			count++;
-		}
-
-		count += Object.values(filterStates.tags.tagSelection).reduce(
-			(acc, isSelected) => acc + (isSelected ? 1 : 0),
+	$effect(() => {
+		activeFilterCount = Object.values(sectionStates).reduce(
+			(acc, sectionState) => acc + sectionState.activeFilterCount,
 			0
 		);
-
-		return count;
-	}
-
-	$effect(() => {
-		filteredRecipes = getFilteredRecipes();
-		activeFilterCount = getActiveFilterCount();
+		filteredRecipes = processAllRecipes();
 	});
-
-	function resetAllFilters() {
-		filterStates = JSON.parse(JSON.stringify(defaultStates));
-	}
 </script>
 
 <div class="space-y-2">
@@ -111,10 +99,14 @@
 			Återställ alla
 		</button>
 	</div>
-	<Section label="Betyg" openByDefualt={true}>
-		<FilterChips bind:state={filterStates.ratings.peopleSelection} />
-	</Section>
-	<Section label="Etiketter" openByDefualt={true}>
-		<FilterChips bind:state={filterStates.tags.tagSelection} />
-	</Section>
+	{#each Object.entries(sections) as [sectionName, section]}
+		<SectionLayout label={section.label} openByDefault={section.openByDefault}>
+			<section.component
+				{allRecipes}
+				bind:processRecipes={sectionStates[sectionName].processRecipes}
+				bind:activeFilterCount={sectionStates[sectionName].activeFilterCount}
+				bind:reset={sectionStates[sectionName].reset}
+			/>
+		</SectionLayout>
+	{/each}
 </div>
