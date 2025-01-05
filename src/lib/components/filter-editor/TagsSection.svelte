@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { SessionState } from '$lib/session-state.svelte';
 	import FilterChips from './FilterChips.svelte';
 	import type { SectionComponentProps } from './FilterEditor.svelte';
 
@@ -13,11 +14,11 @@
 		allRecipes.flatMap((recipe) => recipe.tags || []).map((tag) => [tag, false])
 	);
 
-	let tagSelection = $state(defaultTagSelection);
+	let tagSelection = new SessionState('filters-tags-ts', defaultTagSelection);
 
 	processRecipes = (recipes) => {
 		return recipes.filter((recipe) => {
-			return Object.entries(tagSelection)
+			return Object.entries(tagSelection.value)
 				.filter(([, isSelected]) => isSelected)
 				.every(
 					([selectedTag]) =>
@@ -27,12 +28,12 @@
 	};
 
 	$effect(() => {
-		activeFilterCount = Object.values(tagSelection).filter((isSelected) => isSelected).length;
+		activeFilterCount = Object.values(tagSelection.value).filter((isSelected) => isSelected).length;
 	});
 
 	reset = () => {
-		tagSelection = defaultTagSelection;
+		tagSelection.value = defaultTagSelection;
 	};
 </script>
 
-<FilterChips bind:selection={tagSelection} />
+<FilterChips bind:selection={tagSelection.value} />

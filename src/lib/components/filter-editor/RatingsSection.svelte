@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Recipe } from '$lib/recipe';
+	import { SessionState } from '$lib/session-state.svelte';
 	import FilterChip from './FilterChip.svelte';
 	import FilterChips from './FilterChips.svelte';
 	import type { SectionComponentProps } from './FilterEditor.svelte';
@@ -17,19 +18,19 @@
 		allRecipes.flatMap((recipe) => Object.keys(recipe.ratings || {})).map((name) => [name, false])
 	);
 
-	let peopleSelection = $state(defaultPeopleSelection);
-	let excludeRecipesWithoutRating = $state(false);
-	let minRating = $state(0);
+	let peopleSelection = new SessionState('filters-ratings-ps', defaultPeopleSelection);
+	let excludeRecipesWithoutRating = new SessionState('filters-ratings-erwr', false);
+	let minRating = new SessionState('filters-ratings-mr', 0);
 
 	processRecipes = (recipes) => {
 		return recipes
 			.map((recipe) => {
-				if (Object.values(peopleSelection).every((isSelected) => !isSelected)) {
+				if (Object.values(peopleSelection.value).every((isSelected) => !isSelected)) {
 					return recipe;
 				}
 				const newRatingEntries: [string, number][] = [];
 				Object.entries(recipe.ratings || {}).forEach(([name, rating]) => {
-					if (peopleSelection[name]) {
+					if (peopleSelection.value[name]) {
 						newRatingEntries.push([name, rating]);
 					}
 				});
@@ -45,10 +46,10 @@
 					const ratingEntries = Object.entries(recipe.ratings);
 					const avg =
 						ratingEntries.reduce((sum, [_, rating]) => sum + rating, 0) / ratingEntries.length;
-					if (avg < minRating) {
+					if (avg < minRating.value) {
 						return false;
 					}
-				} else if (excludeRecipesWithoutRating) {
+				} else if (excludeRecipesWithoutRating.value) {
 					return false;
 				}
 				return true;
@@ -57,41 +58,44 @@
 
 	$effect(() => {
 		let count = 0;
-		if (Object.values(peopleSelection).some((isSelected) => isSelected)) {
+		if (Object.values(peopleSelection.value).some((isSelected) => isSelected)) {
 			count++;
 		}
-		if (excludeRecipesWithoutRating) {
+		if (excludeRecipesWithoutRating.value) {
 			count++;
 		}
-		if (minRating !== 0) {
+		if (minRating.value !== 0) {
 			count++;
 		}
 		activeFilterCount = count;
 	});
 
 	reset = () => {
-		peopleSelection = defaultPeopleSelection;
-		excludeRecipesWithoutRating = false;
-		minRating = 0;
+		peopleSelection.value = defaultPeopleSelection;
+		excludeRecipesWithoutRating.value = false;
+		minRating.value = 0;
 	};
 </script>
 
 <div class="space-y-2">
 	<FilterChip
-		isActive={Object.values(peopleSelection).every((isSelected) => !isSelected)}
-		onToggle={() => (peopleSelection = defaultPeopleSelection)}>Alla</FilterChip
+		isActive={Object.values(peopleSelection.value).every((isSelected) => !isSelected)}
+		onToggle={() => (peopleSelection.value = defaultPeopleSelection)}>Alla</FilterChip
 	>
-	<FilterChips bind:selection={peopleSelection} />
+	<FilterChips bind:selection={peopleSelection.value} />
 </div>
 
 <div class="flex items-center justify-between gap-x-2">
 	<label for="exclude-recipes-without-rating">Exkludera rätter utan betyg:</label>
-	<ToggleSwitch id="exclude-recipes-without-rating" bind:value={excludeRecipesWithoutRating} />
+	<ToggleSwitch
+		id="exclude-recipes-without-rating"
+		bind:value={excludeRecipesWithoutRating.value}
+	/>
 </div>
 
 <Slider
 	label="Minimalt snittbetyg"
-	bind:value={minRating}
+	bind:value={minRating.value}
 	labels={['0', '1', '2', '3']}
 	step={0.5}
 />
