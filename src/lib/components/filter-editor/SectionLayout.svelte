@@ -21,7 +21,7 @@
 			</div>
 			{#if !isOpen.value && activeFilterCount > 0}
 				<div
-					class="absolute left-full top-0 -translate-y-1 translate-x-1 rounded-3xl border border-base-300 px-1 text-xs leading-tight"
+					class="absolute left-full top-0 -translate-y-1 translate-x-1 rounded-3xl border border-base-400 px-1 text-xs leading-tight"
 					transition:scale={{ duration: 150 }}
 				>
 					{activeFilterCount}

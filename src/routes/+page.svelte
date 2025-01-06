@@ -8,6 +8,7 @@
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
 	import FilterEditor from '$lib/components/filter-editor/FilterEditor.svelte';
 	import { SessionState } from '$lib/session-state.svelte.js';
+	import { scale } from 'svelte/transition';
 
 	let { data } = $props();
 
@@ -109,21 +110,30 @@
 						{ 'opacity-50': isSidebarOpen.value }
 					]}
 				>
-					<button onclick={openSidebar} id="open-sidebar-button">
+					<button
+						onclick={openSidebar}
+						class="relative"
+						title="Filter"
+						disabled={isSidebarOpen.value}
+					>
 						<TopBarIcon>
 							<IconFilter />
 						</TopBarIcon>
+						{#if !isSidebarOpen.value && activeFilterCount > 0}
+							<div
+								title={`${activeFilterCount} filter är aktiv${activeFilterCount === 1 ? 't' : 'a'}`}
+								class="absolute left-full top-0 -translate-x-2 rounded-3xl border border-base-400 px-1 text-xs leading-tight"
+								transition:scale={{ duration: 150 }}
+							>
+								{activeFilterCount}
+							</div>
+						{/if}
 					</button>
-					{#if activeFilterCount > 0}
-						<label for="open-sidebar-button" class="text-sm leading-tight">
-							{activeFilterCount} filter aktiv{#if activeFilterCount === 1}t{:else}a{/if}
-						</label>
-					{/if}
 				</div>
 				<h1 class="text-center font-semibold leading-tight">
 					Familjens<br />receptsamling
 				</h1>
-				<a class="ml-auto" href="/search/">
+				<a class="ml-auto" href="/search/" title="Sök recept">
 					<TopBarIcon>
 						<IconSearch />
 					</TopBarIcon>
