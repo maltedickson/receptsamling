@@ -132,7 +132,7 @@
 		</TopBar>
 		<div class="p-4 md:p-6">
 			<div class={[{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen.value }]}>
-				<RecipeGrid recipes={JSON.parse(JSON.stringify(filteredRecipes))} />
+				<RecipeGrid recipes={filteredRecipes} />
 			</div>
 		</div>
 	</div>
