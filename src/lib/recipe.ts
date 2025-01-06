@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import type { Picture } from 'vite-imagetools';
 
 export const mealTypesList = ['frukost', 'förrätt', 'huvudrätt', 'sött', 'tillbehör'] as const;
 
@@ -21,14 +22,13 @@ export const recipeDataSchema = z.object({
 	ingredients: z.record(z.string(), z.array(z.tuple([z.string(), z.string()])))
 });
 
-export const recipeSchema = recipeDataSchema.extend({
-	slug: z.string(),
-	content: z.string()
-});
-
 export type ActiveTime = z.infer<typeof activeTimeSchema>;
 export type TotalTime = z.infer<typeof totalTimeSchema>;
-export type Recipe = z.infer<typeof recipeSchema>;
+export type Recipe = z.infer<typeof recipeDataSchema> & {
+	slug: string;
+	content: string;
+	picture: Picture;
+};
 
 export const activeTimeToString = (activeTime: ActiveTime): string => {
 	switch (activeTime) {

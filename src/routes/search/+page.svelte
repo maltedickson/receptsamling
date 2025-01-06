@@ -89,11 +89,9 @@
 						href={`/${recipe.slug}`}
 						class="flex h-20 items-center overflow-hidden rounded bg-white shadow active:underline"
 					>
-						<img
-							src={`/recipe-photos/${recipe.slug}.webp`}
-							alt=""
-							class="aspect-[5/3] h-full rounded-l object-cover"
-						/>
+						<div class="aspect-[5/3] h-full">
+							<enhanced:img src={recipe.picture} alt="" class="size-full object-cover" />
+						</div>
 						<div class="px-[clamp(0.75rem,3%,1rem)] py-2 leading-tight">
 							{recipe.title}
 						</div>

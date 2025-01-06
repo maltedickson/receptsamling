@@ -2,7 +2,6 @@
 	import Stars from '$lib/components/Stars.svelte';
 	import TimeDisplay from '$lib/components/TimeDisplay.svelte';
 	import type { Recipe } from '$lib/recipe';
-
 	let { recipe }: { recipe: Recipe } = $props();
 
 	const avgRating = (ratings: Record<string, number>): number => {
@@ -32,12 +31,12 @@
 			<TimeDisplay activeTime={recipe.activeTime} totalTime={recipe.totalTime} />
 		</div>
 	</div>
-	<a href={`/${recipe.slug}`} class="group relative block">
-		<img
-			src={`/recipe-photos/${recipe.slug}.webp`}
-			alt=""
-			class="mt-4 aspect-[2/1] w-full rounded object-cover"
-		/>
+	<a
+		href={`/${recipe.slug}`}
+		class="group relative mt-4 block aspect-[2/1] overflow-hidden rounded"
+		aria-label={recipe.title}
+	>
+		<enhanced:img src={recipe.picture} alt="" class="size-full object-cover" />
 		<div class="absolute left-0 top-0 size-full group-active:bg-black/20"></div>
 	</a>
 	<div class="mt-6">

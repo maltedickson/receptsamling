@@ -69,7 +69,9 @@
 			</details>
 		{/if}
 	</div>
-	<img src={`/recipe-photos/${recipe.slug}.webp`} alt="" class="aspect-[2/1] w-full object-cover" />
+	<div class="not-prose my-8 aspect-[2/1]">
+		<enhanced:img src={recipe.picture} alt="" class="size-full object-cover" />
+	</div>
 	<div class="not-prose">
 		<div class="space-y-3">
 			<div>

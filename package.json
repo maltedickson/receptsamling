@@ -17,6 +17,7 @@
 		"@eslint/compat": "^1.2.3",
 		"@iconify-json/tabler": "^1.2.13",
 		"@sveltejs/adapter-static": "^3.0.6",
+		"@sveltejs/enhanced-img": "^0.4.4",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@types/markdown-it": "^14.1.2",
