@@ -44,7 +44,7 @@
 				if (recipe.ratings !== undefined) {
 					const ratingEntries = Object.entries(recipe.ratings);
 					const avg =
-						ratingEntries.reduce((sum, [_, rating]) => sum + rating, 0) / ratingEntries.length;
+						ratingEntries.reduce((sum, [, rating]) => sum + rating, 0) / ratingEntries.length;
 					if (avg < minRating.value) {
 						return false;
 					}

@@ -25,8 +25,8 @@
 	processRecipes = (recipes) => {
 		return recipes.filter((recipe) => {
 			return !selectedIngredients.value.some((selectedIngredient) => {
-				const hasIngredient = Object.entries(recipe.ingredients).some(([_, list]) =>
-					list.some(([inRecipe, _]) =>
+				const hasIngredient = Object.entries(recipe.ingredients).some(([, list]) =>
+					list.some(([inRecipe]) =>
 						inRecipe.toLowerCase().includes(selectedIngredient.toLowerCase())
 					)
 				);
@@ -61,8 +61,8 @@
 			return;
 		}
 		const isIngredient = allRecipes.some((recipe) =>
-			Object.entries(recipe.ingredients).some(([_, list]) =>
-				list.some(([inRecipe, _]) => inRecipe.toLowerCase().includes(newIngredient))
+			Object.entries(recipe.ingredients).some(([, list]) =>
+				list.some(([inRecipe]) => inRecipe.toLowerCase().includes(newIngredient))
 			)
 		);
 		if (!isIngredient) {

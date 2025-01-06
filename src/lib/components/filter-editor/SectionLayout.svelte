@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { SessionState } from '$lib/session-state.svelte';
-	import { onMount, type Snippet } from 'svelte';
+	import { type Snippet } from 'svelte';
 	import IconChevronDown from '~icons/tabler/chevron-down';
 	let {
 		label,

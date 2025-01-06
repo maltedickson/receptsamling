@@ -5,7 +5,6 @@
 	import { mealTypesList } from '$lib/recipe';
 
 	let {
-		allRecipes,
 		processRecipes = $bindable(),
 		activeFilterCount = $bindable(),
 		reset = $bindable()
