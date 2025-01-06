@@ -7,24 +7,14 @@
 	import TopBar from '$lib/components/TopBar.svelte';
 	import TopBarIcon from '$lib/components/TopBarIcon.svelte';
 	import FilterEditor from '$lib/components/filter-editor/FilterEditor.svelte';
+	import { SessionState } from '$lib/session-state.svelte.js';
 
 	let { data } = $props();
 
-	let isSidebarOpen = $state(false);
-	const KEY_PREFIX = 'browse-page-';
-	const KEYS = {
-		isSidebarOpen: `${KEY_PREFIX}is-sidebar-open`
-	};
+	let isSidebarOpen = new SessionState('browse-page-iso', false);
 
 	onMount(() => {
 		sessionStorage.setItem('all-recipes-view', 'browse');
-
-		if (sessionStorage.getItem(KEYS.isSidebarOpen) === 'true') {
-			isSidebarOpen = true;
-		}
-		$effect(() => {
-			sessionStorage.setItem(KEYS.isSidebarOpen, isSidebarOpen.toString());
-		});
 	});
 
 	function getScrollbarWidth(): number {
@@ -45,17 +35,17 @@
 	}
 
 	function openSidebar() {
-		isSidebarOpen = true;
+		isSidebarOpen.value = true;
 	}
 	function closeSidebar() {
-		isSidebarOpen = false;
+		isSidebarOpen.value = false;
 	}
 
 	$effect(() => {
 		if (typeof document === 'undefined') {
 			return;
 		}
-		if (isSidebarOpen) {
+		if (isSidebarOpen.value) {
 			document.body.classList.add('overflow-y-hidden', 'lg:overflow-y-auto');
 		} else {
 			document.body.classList.remove('overflow-y-hidden', 'lg:overflow-y-auto');
@@ -80,16 +70,16 @@
 		aria-label="close sidebar"
 		class={[
 			'fixed inset-0 z-50 bg-black/70 opacity-0 transition-opacity lg:hidden',
-			{ 'opacity-100': isSidebarOpen }
+			{ 'opacity-100': isSidebarOpen.value }
 		]}
-		inert={!isSidebarOpen}
+		inert={!isSidebarOpen.value}
 		onclick={closeSidebar}
 	></button>
 
 	<div
 		class={[
 			'fixed bottom-0 left-0 top-0 z-50 w-80 -translate-x-full overflow-y-auto bg-base-100 p-4 shadow-lg transition-transform',
-			{ 'translate-x-0': isSidebarOpen }
+			{ 'translate-x-0': isSidebarOpen.value }
 		]}
 	>
 		<button
@@ -104,19 +94,19 @@
 
 	<div
 		style:--scrollbar-width={`${getScrollbarWidth()}px`}
-		class={['transition-[padding-left]', { 'lg:pl-[var(--sidebar-width)]': isSidebarOpen }]}
+		class={['transition-[padding-left]', { 'lg:pl-[var(--sidebar-width)]': isSidebarOpen.value }]}
 	>
 		<TopBar>
 			<div
 				class={[
 					'grid grid-cols-[1fr_auto_1fr]',
-					{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }
+					{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen.value }
 				]}
 			>
 				<div
 					class={[
 						'col-start-1 flex items-center gap-1 transition-opacity',
-						{ 'opacity-50': isSidebarOpen }
+						{ 'opacity-50': isSidebarOpen.value }
 					]}
 				>
 					<button onclick={openSidebar} id="open-sidebar-button">
@@ -141,7 +131,7 @@
 			</div>
 		</TopBar>
 		<div class="p-4 md:p-6">
-			<div class={[{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen }]}>
+			<div class={[{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen.value }]}>
 				<RecipeGrid recipes={JSON.parse(JSON.stringify(filteredRecipes))} />
 			</div>
 		</div>
