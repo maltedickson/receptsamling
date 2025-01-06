@@ -26,6 +26,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{recipe.title} &mdash; Familjens receptsamling</title>
+</svelte:head>
+
 <div class="flex px-3 py-4">
 	<a href={hrefToAllRecipes} class="flex items-center">
 		<IconChevronLeft />

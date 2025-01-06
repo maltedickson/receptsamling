@@ -67,6 +67,7 @@
 </script>
 
 <svelte:head>
+	<title>Familjens receptsamling</title>
 	<style>
 		body {
 			background-color: rgb(var(--tw-base-100));
