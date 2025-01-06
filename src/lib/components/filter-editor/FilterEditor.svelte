@@ -148,12 +148,17 @@
 		</button>
 	</div>
 	{#each sections as section}
-		<SectionLayout label={section.label} openByDefault={section.openByDefault}>
+		{@const sectionState = sectionStates[section.label]}
+		<SectionLayout
+			label={section.label}
+			openByDefault={section.openByDefault}
+			activeFilterCount={sectionState.activeFilterCount}
+		>
 			<section.component
 				{allRecipes}
-				bind:processRecipes={sectionStates[section.label].processRecipes}
-				bind:activeFilterCount={sectionStates[section.label].activeFilterCount}
-				bind:reset={sectionStates[section.label].reset}
+				bind:processRecipes={sectionState.processRecipes}
+				bind:activeFilterCount={sectionState.activeFilterCount}
+				bind:reset={sectionState.reset}
 			/>
 		</SectionLayout>
 	{/each}
