@@ -69,7 +69,7 @@
 			</details>
 		{/if}
 	</div>
-	<div class="not-prose my-8 aspect-[2/1]">
+	<div class="not-prose my-8 aspect-video">
 		<enhanced:img src={recipe.picture} alt="" class="size-full object-cover" />
 	</div>
 	<div class="not-prose">
