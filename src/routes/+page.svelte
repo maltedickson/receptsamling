@@ -140,7 +140,7 @@
 				</a>
 			</div>
 		</TopBar>
-		<div class="p-4 md:p-6">
+		<div class="p-4 pt-2 md:p-6 md:pt-2">
 			<div class={[{ 'pr-[var(--scrollbar-width)] lg:pr-0': isSidebarOpen.value }]}>
 				<RecipeGrid recipes={filteredRecipes} />
 			</div>
