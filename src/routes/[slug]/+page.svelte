@@ -1,19 +1,8 @@
 <script lang="ts">
 	import Stars from '$lib/components/Stars.svelte';
 	import { activeTimeToString } from '$lib/recipe.js';
-	import { onMount } from 'svelte';
-	import IconChevronLeft from '~icons/tabler/chevron-left';
 	const { data } = $props();
 	const recipe = data.recipe;
-
-	let hrefToAllRecipes = $state('/');
-
-	onMount(() => {
-		const storedView = sessionStorage.getItem('all-recipes-view');
-		if (storedView === 'search') {
-			hrefToAllRecipes = '/search/';
-		}
-	});
 
 	function getAvgRating(ratings: Record<string, number>): number {
 		let total = 0;
@@ -30,10 +19,9 @@
 	<title>{recipe.title} &mdash; Familjens receptsamling</title>
 </svelte:head>
 
-<div class="flex px-3 py-4">
-	<a href={hrefToAllRecipes} class="flex items-center">
-		<IconChevronLeft />
-		<span>Alla recept</span>
+<div class="flex justify-center">
+	<a class="block py-2 text-center font-semibold leading-tight" href="/">
+		Familjens<br />receptsamling
 	</a>
 </div>
 
@@ -46,7 +34,7 @@
 	</div>
 {/snippet}
 
-<div class="prose prose-base mx-auto mt-2 box-content px-4 pb-8 prose-h1:font-bold">
+<div class="prose prose-base mx-auto mt-6 box-content px-4 pb-8 prose-h1:font-bold">
 	<h1 class="mb-2">{recipe.title}</h1>
 	<div class="not-prose">
 		{#if recipe.ratings !== undefined}
