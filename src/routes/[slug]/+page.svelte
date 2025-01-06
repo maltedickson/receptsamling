@@ -34,7 +34,7 @@
 	</div>
 {/snippet}
 
-<div class="prose prose-base mx-auto mt-6 box-content px-4 pb-8 prose-h1:font-bold">
+<div class="prose prose-base mx-auto mt-4 box-content px-4 pb-8 prose-h1:font-bold">
 	<h1 class="mb-2">{recipe.title}</h1>
 	<div class="not-prose">
 		{#if recipe.ratings !== undefined}
