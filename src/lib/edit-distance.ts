@@ -1,30 +1,25 @@
-const editDistance = (
+function getEditDistance(
 	source: string,
-	target: string,
-	insertCost: number = 0.5,
-	modifyCost: number = 1,
-	removeCost: number = 1
-): number => {
+	target: string
+): { distance: number; indices: Set<number> } {
 	const n = source.length;
 	const m = target.length;
 
-	// Create DP table
+	// Create DP table and auxiliary table for tracking decisions
 	const dp: number[][] = Array.from({ length: n + 1 }, () => Array(m + 1).fill(Infinity));
-
-	const dpp: number[][] = Array.from({ length: n + 1 }, () => Array(m + 1).fill(Infinity));
+	const parent: [number, number][][] = Array.from({ length: n + 1 }, () =>
+		Array.from({ length: m + 1 }, () => [-1, -1])
+	);
 
 	// Base cases
 	dp[0][0] = 0; // No operations needed for empty strings
-	dpp[0][0] = 0;
-
 	for (let i = 1; i <= n; i++) {
-		dp[i][0] = i * removeCost; // Removing all characters from source
-		dpp[i][0] = dp[i][0];
+		dp[i][0] = i; // Removing all characters from source
+		parent[i][0] = [i - 1, 0];
 	}
-
 	for (let j = 1; j <= m; j++) {
-		dp[0][j] = insertCost; // Single insert operation for entire target prefix
-		dpp[0][j] = insertCost;
+		dp[0][j] = 0; // Adding prefix is free
+		parent[0][j] = [0, j - 1];
 	}
 
 	// Fill the DP table
@@ -32,24 +27,47 @@ const editDistance = (
 		for (let j = 1; j <= m; j++) {
 			// Case 1: Characters match, no cost
 			if (source[i - 1] === target[j - 1]) {
-				dp[i][j] = dp[i - 1][j - 1];
+				if (dp[i][j] > dp[i - 1][j - 1]) {
+					dp[i][j] = dp[i - 1][j - 1];
+					parent[i][j] = [i - 1, j - 1];
+				}
 			} else {
 				// Case 2: Modify a character
-				dp[i][j] = Math.min(dp[i][j], dp[i - 1][j - 1] + modifyCost);
+				if (dp[i][j] > dp[i - 1][j - 1] + 1) {
+					dp[i][j] = dp[i - 1][j - 1] + 1;
+					parent[i][j] = [i - 1, j - 1];
+				}
 			}
 
 			// Case 3: Remove a character from the source
-			dp[i][j] = Math.min(dp[i][j], dp[i - 1][j] + removeCost);
+			if (dp[i][j] > dp[i - 1][j] + 1) {
+				dp[i][j] = dp[i - 1][j] + 1;
+				parent[i][j] = [i - 1, j];
+			}
 
-			// Case 4: Insert a substring into the source
-			dp[i][j] = Math.min(dp[i][j], dpp[i][j - 1] + insertCost);
-
-			// Update pfxs for current cell
-			dpp[i][j] = Math.min(dpp[i][j - 1], dp[i][j]);
+			// Case 4: Insert a character into the source
+			const cost = i === n ? 0 : 1;
+			if (dp[i][j] > dp[i][j - 1] + cost) {
+				dp[i][j] = dp[i][j - 1] + cost;
+				parent[i][j] = [i, j - 1];
+			}
 		}
 	}
 
-	return dp[n][m];
-};
+	// Backtrack to find kept indices
+	const indices: Set<number> = new Set();
+	let i = n,
+		j = m;
+	while (i > 0 || j > 0) {
+		const [prevI, prevJ] = parent[i][j];
+		if (prevI === i - 1 && prevJ === j - 1 && source[i - 1] === target[j - 1]) {
+			indices.add(j - 1); // Record the index in the target string
+		}
+		i = prevI;
+		j = prevJ;
+	}
 
-export default editDistance;
+	return { distance: dp[n][m], indices };
+}
+
+export default getEditDistance;
