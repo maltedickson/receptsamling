@@ -131,6 +131,7 @@
 		<div class="mx-auto max-w-lg">
 			<ul class="space-y-2">
 				{#each getResults(inputText
+						.toLowerCase()
 						.split(' ')
 						.filter((word) => word !== '')) as result (result.recipe.slug)}
 					<li animate:flip={{ duration: 150 }}>
