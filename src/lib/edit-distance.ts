@@ -25,31 +25,31 @@ function getEditDistance(
 	// Fill the DP table
 	for (let i = 1; i <= n; i++) {
 		for (let j = 1; j <= m; j++) {
-			// Case 1: Characters match, no cost
+			// Insert a character into the source
+			const cost = i === n ? 0 : 1;
+			if (dp[i][j] > dp[i][j - 1] + cost) {
+				dp[i][j] = dp[i][j - 1] + cost;
+				parent[i][j] = [i, j - 1];
+			}
+
+			// Remove a character from the source
+			if (dp[i][j] > dp[i - 1][j] + 1) {
+				dp[i][j] = dp[i - 1][j] + 1;
+				parent[i][j] = [i - 1, j];
+			}
+
+			// Characters match, no cost
 			if (source[i - 1] === target[j - 1]) {
 				if (dp[i][j] > dp[i - 1][j - 1]) {
 					dp[i][j] = dp[i - 1][j - 1];
 					parent[i][j] = [i - 1, j - 1];
 				}
 			} else {
-				// Case 2: Modify a character
+				// Modify a character
 				if (dp[i][j] > dp[i - 1][j - 1] + 1) {
 					dp[i][j] = dp[i - 1][j - 1] + 1;
 					parent[i][j] = [i - 1, j - 1];
 				}
-			}
-
-			// Case 3: Remove a character from the source
-			if (dp[i][j] > dp[i - 1][j] + 1) {
-				dp[i][j] = dp[i - 1][j] + 1;
-				parent[i][j] = [i - 1, j];
-			}
-
-			// Case 4: Insert a character into the source
-			const cost = i === n ? 0 : 1;
-			if (dp[i][j] > dp[i][j - 1] + cost) {
-				dp[i][j] = dp[i][j - 1] + cost;
-				parent[i][j] = [i, j - 1];
 			}
 		}
 	}
