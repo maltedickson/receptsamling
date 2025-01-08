@@ -7,7 +7,7 @@ const md = markdownit();
 
 const imageModules: Record<string, { default: Picture }> = Object.fromEntries(
 	Object.entries(
-		import.meta.glob('/src/lib/recipes/*.{png,webp}', {
+		import.meta.glob('/src/lib/recipes/*.{png,webp,jpg}', {
 			eager: true,
 			query: { enhanced: true }
 		})
