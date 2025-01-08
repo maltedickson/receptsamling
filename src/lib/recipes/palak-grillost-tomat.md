@@ -24,7 +24,7 @@ ingredients:
     - [tomatpuré, 2 msk]
     - [garam masala, 1 msk]
     - [krossade tomater, 1 paket (à 390 g)]
-    - [tomat (frivilligt), ca 2 st]
+    - [tomat (frivilligt), 2 st]
     - [grädde, 2 dl]
     - [grönsaksbuljong, 1 tärning]
     - [salt, efter smak]
@@ -56,7 +56,7 @@ Häll ned osten i grytan och smaka av med salt. Toppa gärna med rostade jordnö
 
 ## Kommentarer
 
-Det här receptet är baserat på [https://www.ica.se/recept/palak-paneer-med-tomat-och-halloumi-722056/](https://www.ica.se/recept/palak-paneer-med-tomat-och-halloumi-722056/). Vi har dock länge nu lagat från minne/på känsla så jag är väldigt osäker på exakt vilka mängder vi brukar ha.
+Det här receptet är baserat på [https://www.ica.se/recept/palak-paneer-med-tomat-och-halloumi-722056/](https://www.ica.se/recept/palak-paneer-med-tomat-och-halloumi-722056/). Vi har dock länge nu lagat från minne/på känsla så jag är väldigt osäker på exakt vilka mängder vi brukar ha. Generellt tror jag dock inte att det spelar så stor roll. Det allra mesta kan man nog ta både mer eller mindre av utan att rätten behöver bli sämre för det.
 
 Jag är också osäker på exakt hur lång tid det här brukar ta att laga. Är man ett par/tre personer som hjälps åt kan det nog gå på en halvtimme.
 
