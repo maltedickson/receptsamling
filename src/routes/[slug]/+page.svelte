@@ -94,7 +94,9 @@
 						{#each list as item}
 							<tr>
 								<td>{item[0]}</td>
-								<td class="pl-4">{item[1]}</td>
+								{#if item.length == 2}
+									<td class="pl-4">{item[1]}</td>
+								{/if}
 							</tr>
 						{/each}
 					</tbody>

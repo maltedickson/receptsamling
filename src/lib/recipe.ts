@@ -19,7 +19,10 @@ export const recipeDataSchema = z.object({
 	preferences: z.array(z.enum(preferencesList)).optional(),
 	tags: z.array(z.string()).optional(),
 	servings: z.number().optional(),
-	ingredients: z.record(z.string(), z.array(z.tuple([z.string(), z.string()])))
+	ingredients: z.record(
+		z.string(),
+		z.array(z.tuple([z.string(), z.string()]).or(z.tuple([z.string()])))
+	)
 });
 
 export type ActiveTime = z.infer<typeof activeTimeSchema>;
